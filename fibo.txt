@@ -1,0 +1,7 @@
+How to find out Unused memory's size in Recursive fibonacci method?
+
+What about do subtraction from overall size?
+As an inductive result, the size of a natural number 'N' its Fibo binary tree's size is same with depth (N-2) full binary tree.
+Which means it size as formula, from k=0 to N-2 Sigma 2^k.
+It can express like Size=2*(2^N-1)/(2-1)-2^(n-1)-2^N.
+The result is Size-(N+1)
