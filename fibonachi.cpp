@@ -7,9 +7,6 @@
 
 using namespace std;
 
-long long fibo_01(int n);
-int fibo_02(int n);
-
 long long fibo_01(int n)
 {
 	long long answer=0;
@@ -19,20 +16,10 @@ long long fibo_01(int n)
 	while(count<=n)
 	{
 		fib[count]=fib[count-1]+fib[count-2];
-//		cout<<fib[count]<<endl;
 		++count;
 	}
 	
 	answer=fib[n];
-	
-	return answer;
-}
-
-int fibo_02(int n)
-{
-	int count=0;
-	int answer=0;
-	answer=fibo_02(count);
 	
 	return answer;
 }
@@ -49,15 +36,38 @@ int fibor(int n)
 	return f ;
 }
 
-void fibor_test( int N = 5 )
-{
-	printf( "fibor_test()" ) ; printf( CRLF ) ;
-	for ( int i=1; i<( N+1 ) ; i++ ) 
-	{
-		cout<< fibor( i )<<endl ;
-	}
-}
+vector< vector<int> > FN;
+vector<int> set;
 
+int fibor01(int n)
+{
+    int answer = 0;
+    vector< vector<int> >::iterator row;
+    vector<int>::iterator col;    
+    
+    if(n<2)
+    {
+        answer=n;
+    }
+    else
+    {
+        for(row=FN.begin();row!=FN.end();++row)
+        {
+            col=row->begin();
+            if(n==(*col))
+            {
+                return (*(col+1));
+            }
+        }
+        answer=(fibor01(n-1)+fibor01(n-2));
+    }
+    set.push_back(n);
+    set.push_back(answer);
+    FN.push_back(set);
+    set.clear();
+//    cout<<answer<<endl;
+    return answer;
+}
 
 void fn( int n )
 {
@@ -68,36 +78,34 @@ void fn( int n )
 	fn( n-1) ;
 }
 
+void fibor_test( int N = 30 )
+{
+	printf( "fibor_test()" ) ; printf( CRLF ) ;
+	for ( int i=1; i<( N+1 ) ; i++ ) 
+	{
+		cout<< fibor01( i )<<endl ;
+	}
+}
+
 void fn_test( ) 
 {
 	printf( "fn_test()" ) ; printf( CRLF ) ;
-	fn( 5 ) ;
+	fn( 30 ) ;
 }
 
-int Unused(int n)
+void fibo_test(void)
 {
-	return pow(2,n+1)-2-pow(2,n)-pow(2,n-1)-(n+1);
+	long long answer=0;
+	int idx=30;
+	answer=fibo_01(idx);
+	cout<<"common repeat fibonachi index : "<<idx<<", result : "<<answer<<endl;
 }
 
 int main(void)
 {
-	long long answer=0;
-	int unuse=0;
-	
-	answer=fibo_01(100);
-	cout<<answer<<endl;
-//	answer=fibo_02(10);
-	
-	fibor_test() ;
-	fn_test() ;
-	unuse=Unused(8);
-	
-	cout<<"\n"<<unuse<<endl;
+	fibor_test();
+//	fn_test();
+	fibo_test();
+
 	return 0;
 }
-
-
-
-
-
-
